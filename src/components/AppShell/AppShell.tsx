@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Sidebar } from '@/components/Sidebar';
 import { Navbar } from '@/components/Navbar';
 import { AddItemDrawer } from '@/components/AddItemDrawer';
+import { SearchProvider } from '@/context/SearchContext';
 import styles from './AppShell.module.css';
 
 interface AppShellProps {
@@ -20,28 +21,30 @@ export function AppShell({ children }: AppShellProps) {
   }
 
   return (
-    <div className={styles.root}>
-      {sidebarOpen && (
-        <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
-      )}
+    <SearchProvider>
+      <div className={styles.root}>
+        {sidebarOpen && (
+          <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
+        )}
 
-      <div className={`${styles.sidebarWrapper} ${sidebarOpen ? styles.open : styles.closed}`}>
-        <Sidebar />
-      </div>
+        <div className={`${styles.sidebarWrapper} ${sidebarOpen ? styles.open : styles.closed}`}>
+          <Sidebar />
+        </div>
 
-      <div className={styles.main}>
-        <Navbar
-          onMenuClick={() => setSidebarOpen((o) => !o)}
-          onAddClick={() => setDrawerOpen(true)}
+        <div className={styles.main}>
+          <Navbar
+            onMenuClick={() => setSidebarOpen((o) => !o)}
+            onAddClick={() => setDrawerOpen(true)}
+          />
+          <main className={styles.content} key={refreshKey}>{children}</main>
+        </div>
+
+        <AddItemDrawer
+          isOpen={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          onAdded={handleAdded}
         />
-        <main className={styles.content} key={refreshKey}>{children}</main>
       </div>
-
-      <AddItemDrawer
-        isOpen={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        onAdded={handleAdded}
-      />
-    </div>
+    </SearchProvider>
   );
 }
