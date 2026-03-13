@@ -52,88 +52,17 @@ src/
 The full project plan is in `BACKLOG.md`. Work through tickets in order.
 Each ticket has acceptance criteria that must be met before moving on.
 
-## Git Workflow (MANDATORY — follow this for EVERY ticket)
+## Git Workflow
 
-**Before you start coding, always read `BACKLOG.md` and find the next ticket
-with status `[ ]` (todo). That is the ticket you work on.**
+Follow this for every ticket:
 
-### 1. Start the ticket
-
-```bash
-git fetch origin
-git checkout develop
-git pull origin develop
-git checkout -b feat/ticket-N-short-description
-```
-
-Branch naming: `feat/ticket-N-short-description`
-Examples: `feat/ticket-0-project-setup`, `feat/ticket-2-layout-shell`
-
-### 2. Update the ticket status to in-progress
-
-Open `BACKLOG.md` and change the ticket's status from `[ ]` to `[~]`:
-
-```
-**Status:** [~]
-```
-
-Commit this change:
-
-```bash
-git add BACKLOG.md
-git commit -m "chore: start ticket N"
-```
-
-### 3. Code the feature
-
-Implement everything in the ticket. Make granular commits as you go:
-
-```bash
-git add .
-git commit -m "feat: ticket-N description of what was done"
-```
-
-### 4. Push and create a Pull Request
-
-```bash
-git push origin feat/ticket-N-short-description
-gh pr create --base develop --title "feat: ticket-N — Short Title" \
-  --body "## Summary
-Implements Ticket N from BACKLOG.md.
-
-## Changes
-- [list what was built]
-
-## Acceptance Criteria
-- [copy from BACKLOG.md]"
-```
-
-### 5. Mark the ticket as done
-
-Open `BACKLOG.md` and change the ticket's status from `[~]` to `[x]`:
-
-```
-**Status:** [x]
-```
-
-Commit and push:
-
-```bash
-git add BACKLOG.md
-git commit -m "chore: complete ticket N"
-git push origin feat/ticket-N-short-description
-```
-
-### 6. Move to the next ticket
-
-Do NOT wait for PR review. Immediately find the next `[ ]` ticket in
-`BACKLOG.md` and start the cycle again from step 1.
-
-### Status legend in BACKLOG.md
-
-- `[ ]` = Todo (not started)
-- `[~]` = In progress
-- `[x]` = Done (PR created)
+1. `git fetch origin && git checkout develop && git pull origin develop`
+2. `git checkout -b feat/ticket-N-short-description`
+3. Update ticket status in BACKLOG.md from `[ ]` to `[~]`, commit: `chore: start ticket N`
+4. Implement the ticket, commit: `feat: ticket-N description`
+5. Push and create a PR: `gh pr create --base develop`
+6. Update ticket status from `[~]` to `[x]`, commit and push: `chore: complete ticket N`
+7. **Stop. Wait for the user to tell you to start the next ticket.**
 
 ### Rules
 
@@ -142,3 +71,4 @@ Do NOT wait for PR review. Immediately find the next `[ ]` ticket in
 - ALWAYS create a PR via `gh pr create` — do not merge yourself
 - ALWAYS update ticket status in BACKLOG.md at start and end
 - One branch per ticket. One PR per ticket.
+- **NEVER automatically start the next ticket — always wait for user instruction**
