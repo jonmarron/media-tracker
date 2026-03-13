@@ -312,7 +312,7 @@ Add the ability to edit and delete existing items.
 
 ### Ticket 8 — Next.js API Routes (Backend)
 
-**Status:** [~]
+**Status:** [x]
 
 Replace the localStorage-only approach with a proper Next.js backend using API Routes. The data should be stored server-side (in-memory for now, using a module-level store) so it survives across client sessions without relying on the browser.
 
