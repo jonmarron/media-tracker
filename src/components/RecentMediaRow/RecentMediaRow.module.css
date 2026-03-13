@@ -1,0 +1,98 @@
+@reference "../../app/globals.css";
+
+.section {
+  @apply flex flex-col gap-3;
+}
+
+.header {
+  @apply flex items-center justify-between;
+}
+
+.heading {
+  @apply text-sm font-semibold;
+}
+
+.viewAll {
+  @apply flex items-center gap-1 text-xs;
+  color: var(--primary);
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.viewAllIcon {
+  @apply h-3 w-3;
+}
+
+.empty {
+  @apply text-xs;
+  color: var(--muted);
+}
+
+.list {
+  @apply flex flex-col rounded-xl;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  divide-color: var(--border);
+}
+
+.item {
+  @apply flex items-center gap-3 px-4 py-3;
+  border-bottom: 1px solid var(--border);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.itemIcon {
+  @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg;
+  background-color: var(--surface);
+}
+
+.itemIconSvg {
+  @apply h-4 w-4;
+  color: var(--muted);
+}
+
+.itemBody {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.itemTitle {
+  @apply truncate text-sm font-medium;
+}
+
+.itemSubtitle {
+  @apply truncate text-xs;
+  color: var(--muted);
+}
+
+.itemMeta {
+  @apply flex shrink-0 flex-col items-end gap-1;
+}
+
+.badge {
+  @apply rounded-full px-2 py-0.5 text-xs font-medium;
+}
+
+.badgeCompleted {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badgeWant {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.stars {
+  @apply flex items-center gap-0.5;
+}
+
+.starIcon {
+  @apply h-2.5 w-2.5;
+  fill: #fbbf24;
+  color: #fbbf24;
+}

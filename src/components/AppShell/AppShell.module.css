@@ -1,0 +1,30 @@
+@reference "../../app/globals.css";
+
+.root {
+  @apply flex h-screen overflow-hidden;
+}
+
+.overlay {
+  @apply fixed inset-0 z-20 md:hidden;
+  background-color: rgb(0 0 0 / 0.4);
+}
+
+.sidebarWrapper {
+  @apply fixed inset-y-0 left-0 z-30 transition-transform duration-200 md:static md:translate-x-0;
+}
+
+.sidebarWrapper.open {
+  @apply translate-x-0;
+}
+
+.sidebarWrapper.closed {
+  @apply -translate-x-full md:translate-x-0;
+}
+
+.main {
+  @apply flex flex-1 flex-col overflow-hidden;
+}
+
+.content {
+  @apply flex-1 overflow-y-auto p-6;
+}

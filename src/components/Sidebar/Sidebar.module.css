@@ -1,0 +1,44 @@
+@reference "../../app/globals.css";
+
+.sidebar {
+  @apply flex h-full w-60 flex-col;
+  background-color: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.logo {
+  @apply flex h-16 items-center gap-2 px-5;
+  border-bottom: 1px solid var(--border);
+}
+
+.logoIcon {
+  @apply h-5 w-5;
+  color: var(--primary);
+}
+
+.logoText {
+  @apply text-base font-semibold tracking-tight;
+}
+
+.nav {
+  @apply flex flex-col gap-1 p-3;
+}
+
+.navLink {
+  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors;
+  color: var(--muted);
+}
+
+.navLink:hover {
+  background-color: var(--border);
+  color: var(--foreground);
+}
+
+.navLink.active {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.navIcon {
+  @apply h-4 w-4 shrink-0;
+}

@@ -1,0 +1,68 @@
+@reference "../../app/globals.css";
+
+.navbar {
+  @apply sticky top-0 z-10 flex h-16 items-center justify-between px-5;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.left {
+  @apply flex items-center gap-3;
+}
+
+.menuButton {
+  @apply rounded-lg p-1.5 transition-colors md:hidden;
+  color: var(--muted);
+}
+
+.menuButton:hover {
+  background-color: var(--surface);
+  color: var(--foreground);
+}
+
+.menuIcon {
+  @apply h-5 w-5;
+}
+
+.title {
+  @apply text-lg font-semibold;
+}
+
+.addButton {
+  @apply flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.addButton:hover {
+  background-color: var(--primary-hover);
+}
+
+.addIcon {
+  @apply h-4 w-4;
+}
+
+.searchWrapper {
+  @apply relative w-64;
+}
+
+.searchIcon {
+  @apply absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2;
+  color: var(--muted);
+}
+
+.searchInput {
+  @apply w-full rounded-lg py-2 pl-9 pr-3 text-sm outline-none;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.searchInput::placeholder {
+  color: var(--muted);
+}
+
+.searchInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}

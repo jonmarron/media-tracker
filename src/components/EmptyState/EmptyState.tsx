@@ -1,5 +1,6 @@
 import { BookOpen, Film } from 'lucide-react';
 import { MediaType } from '@/types';
+import styles from './EmptyState.module.css';
 
 interface EmptyStateProps {
   type: MediaType;
@@ -11,12 +12,12 @@ export function EmptyState({ type, filtered }: EmptyStateProps) {
   const noun = type === 'book' ? 'books' : 'films';
 
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-24 text-center">
-      <Icon className="h-12 w-12 text-[var(--border)]" />
-      <p className="text-sm font-medium text-[var(--foreground)]">
+    <div className={styles.root}>
+      <Icon className={styles.icon} />
+      <p className={styles.heading}>
         {filtered ? `No ${noun} match this filter` : `No ${noun} yet`}
       </p>
-      <p className="text-xs text-[var(--muted)]">
+      <p className={styles.subtext}>
         {filtered
           ? 'Try switching to a different filter.'
           : `Click "+ Add" to add your first ${type}.`}
