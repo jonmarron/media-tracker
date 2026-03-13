@@ -1,0 +1,16 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply flex flex-col gap-1 rounded-xl px-5 py-4;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.value {
+  @apply text-2xl font-bold;
+}
+
+.label {
+  @apply text-xs;
+  color: var(--muted);
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import { MediaStatus } from '@/types';
+import styles from './FilterBar.module.css';
 
 export type FilterOption = 'all' | MediaStatus;
 
@@ -17,16 +18,12 @@ interface FilterBarProps {
 
 export function FilterBar({ active, onChange }: FilterBarProps) {
   return (
-    <div className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-1 w-fit">
+    <div className={styles.bar}>
       {filters.map(({ value, label }) => (
         <button
           key={value}
           onClick={() => onChange(value)}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
-            active === value
-              ? 'bg-[var(--primary)] text-white shadow-sm'
-              : 'text-[var(--muted)] hover:text-[var(--foreground)]'
-          }`}
+          className={`${styles.button} ${active === value ? styles.active : ''}`}
         >
           {label}
         </button>
