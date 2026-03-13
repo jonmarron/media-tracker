@@ -285,7 +285,7 @@ Use the `searchItems()` helper from Ticket 1, or filter client-side.
 
 ### Ticket 7 — Edit & Delete Items
 
-**Status:** [ ]
+**Status:** [~]
 
 Add the ability to edit and delete existing items.
 
