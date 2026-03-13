@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { BookOpen, Film, Star, ArrowRight } from 'lucide-react';
 import { MediaItem, MediaType } from '@/types';
+import { useDrawerContext } from '@/context/DrawerContext';
 import styles from './RecentMediaRow.module.css';
 
 interface RecentMediaRowProps {
@@ -13,6 +14,7 @@ interface RecentMediaRowProps {
 export function RecentMediaRow({ type, items }: RecentMediaRowProps) {
   const title = type === 'book' ? 'Recently Added Books' : 'Recently Added Films';
   const href = type === 'book' ? '/books' : '/films';
+  const { openEdit } = useDrawerContext();
 
   return (
     <section className={styles.section}>
@@ -28,7 +30,7 @@ export function RecentMediaRow({ type, items }: RecentMediaRowProps) {
       ) : (
         <div className={styles.list}>
           {items.map((item) => (
-            <RecentItem key={item.id} item={item} />
+            <RecentItem key={item.id} item={item} onEdit={openEdit} />
           ))}
         </div>
       )}
@@ -36,11 +38,11 @@ export function RecentMediaRow({ type, items }: RecentMediaRowProps) {
   );
 }
 
-function RecentItem({ item }: { item: MediaItem }) {
+function RecentItem({ item, onEdit }: { item: MediaItem; onEdit: (item: MediaItem) => void }) {
   const Icon = item.type === 'book' ? BookOpen : Film;
 
   return (
-    <div className={styles.item}>
+    <button type="button" className={styles.item} onClick={() => onEdit(item)} aria-label={`Edit ${item.title}`}>
       <div className={styles.itemIcon}>
         <Icon className={styles.itemIconSvg} />
       </div>
@@ -63,6 +65,6 @@ function RecentItem({ item }: { item: MediaItem }) {
           </div>
         )}
       </div>
-    </div>
+    </button>
   );
 }

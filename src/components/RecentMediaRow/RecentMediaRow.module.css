@@ -38,12 +38,16 @@
 }
 
 .item {
-  @apply flex items-center gap-3 px-4 py-3;
+  @apply flex w-full items-center gap-3 px-4 py-3 text-left transition-colors;
   border-bottom: 1px solid var(--border);
 }
 
 .item:last-child {
   border-bottom: none;
+}
+
+.item:hover {
+  background-color: var(--surface);
 }
 
 .itemIcon {

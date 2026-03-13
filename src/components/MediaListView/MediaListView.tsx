@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { MediaItem, MediaType } from '@/types';
 import { useMediaItems } from '@/hooks/useMediaItems';
 import { useSearchContext } from '@/context/SearchContext';
+import { useDrawerContext } from '@/context/DrawerContext';
 import { FilterBar, FilterOption } from '@/components/FilterBar';
 import { MediaCard } from '@/components/MediaCard';
 import { EmptyState } from '@/components/EmptyState';
@@ -16,6 +17,7 @@ interface MediaListViewProps {
 export function MediaListView({ type }: MediaListViewProps) {
   const { items } = useMediaItems(type);
   const { searchQuery } = useSearchContext();
+  const { openEdit } = useDrawerContext();
   const [filter, setFilter] = useState<FilterOption>('all');
 
   const searchFiltered = useMemo(() => {
@@ -34,7 +36,7 @@ export function MediaListView({ type }: MediaListViewProps) {
     filter === 'all' ? searchFiltered : searchFiltered.filter((i) => i.status === filter);
 
   function handleCardClick(item: MediaItem) {
-    console.log('card clicked:', item.id);
+    openEdit(item);
   }
 
   const isSearchEmpty = searchQuery.length > 0 && filtered.length === 0;

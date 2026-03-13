@@ -153,6 +153,54 @@
   border-top: 1px solid var(--border);
 }
 
+.deleteItemButton {
+  @apply w-full rounded-lg py-2.5 text-sm font-medium transition-colors mb-3;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  background-color: transparent;
+}
+
+.deleteItemButton:hover {
+  background-color: var(--danger);
+  color: var(--primary-foreground);
+}
+
+.confirmDelete {
+  @apply rounded-lg p-3 mb-3;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.confirmText {
+  @apply text-sm font-medium mb-2;
+  color: var(--foreground);
+}
+
+.confirmButtons {
+  @apply flex gap-2;
+}
+
+.cancelButton {
+  @apply flex-1 rounded-lg py-2 text-sm font-medium transition-colors;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.cancelButton:hover {
+  background-color: var(--surface);
+  color: var(--foreground);
+}
+
+.deleteButton {
+  @apply flex-1 rounded-lg py-2 text-sm font-medium transition-colors;
+  background-color: var(--danger);
+  color: var(--primary-foreground);
+}
+
+.deleteButton:hover {
+  background-color: var(--danger-hover);
+}
+
 .submitButton {
   @apply w-full rounded-lg py-2.5 text-sm font-medium transition-colors;
   background-color: var(--primary);
