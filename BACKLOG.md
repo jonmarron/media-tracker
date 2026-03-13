@@ -383,7 +383,7 @@ Add an interactive Swagger UI to document and manually test the API routes built
 - Create `src/app/api/docs/openapi.ts` — exports the OpenAPI 3.0 spec object describing all four endpoints (`GET /api/items`, `POST /api/items`, `PUT /api/items/[id]`, `DELETE /api/items/[id]`) with request/response schemas derived from the `MediaItem` type
 - Create `src/app/api/docs/route.ts` — `GET /api/docs` returns the spec as JSON so it can be fetched by the UI
 - Create `src/app/docs/page.tsx` — a client page at `/docs` that renders `SwaggerUI` pointed at `/api/docs`
-- Add a link to `/docs` in the Sidebar under the existing nav links, visually separated (e.g. a small "API Docs" entry at the bottom)
+- The page is accessible at `/docs` directly — no sidebar or navbar link needed (it's a developer tool, not part of the app UI)
 
 **Spec must document:**
 
@@ -397,7 +397,7 @@ Add an interactive Swagger UI to document and manually test the API routes built
 - Navigating to `/docs` renders the Swagger UI without errors
 - All four endpoints are listed with their parameters, request bodies, and response schemas
 - Clicking "Try it out" on `GET /api/items` and executing returns live data from the server
-- The sidebar link to `/docs` is visible and navigates correctly
+- Navigating directly to `/docs` in the browser renders the Swagger UI correctly
 
 ---
 

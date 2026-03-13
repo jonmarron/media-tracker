@@ -1,0 +1,15 @@
+@reference "../globals.css";
+
+/* Pull the Swagger UI out of the padded content box so it can use its own layout */
+.wrapper {
+  margin: -1.5rem;
+}
+
+.loading {
+  @apply flex items-center justify-center py-20;
+}
+
+.loadingText {
+  @apply text-sm;
+  color: var(--muted);
+}
