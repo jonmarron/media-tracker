@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { useMediaItems } from '@/hooks/useMediaItems';
 import { useSearchContext } from '@/context/SearchContext';
+import { useDrawerContext } from '@/context/DrawerContext';
 import { StatCard } from '@/components/StatCard';
 import { RecentMediaRow } from '@/components/RecentMediaRow';
 import { MediaCard } from '@/components/MediaCard';
@@ -13,6 +14,7 @@ export default function DashboardPage() {
   const { items: books } = useMediaItems('book');
   const { items: films } = useMediaItems('film');
   const { searchQuery } = useSearchContext();
+  const { openEdit } = useDrawerContext();
 
   const recentBooks = useMemo(
     () => [...books].sort((a, b) => b.dateAdded.localeCompare(a.dateAdded)).slice(0, 5),
@@ -47,7 +49,7 @@ export default function DashboardPage() {
   }, [books, films, searchQuery]);
 
   function handleCardClick(item: MediaItem) {
-    console.log('card clicked:', item.id);
+    openEdit(item);
   }
 
   if (searchQuery) {
