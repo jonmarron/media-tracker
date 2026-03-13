@@ -348,7 +348,7 @@ Replace the localStorage-only approach with a proper Next.js backend using API R
 
 ### Ticket 9 — Connect Frontend to Backend API
 
-**Status:** [ ]
+**Status:** [x]
 
 Wire the frontend to the API routes created in Ticket 8. Replace all direct calls to the localStorage helpers (`addItem`, `updateItem`, `deleteItem`, `getItems`, `searchItems`) in components and hooks with `fetch` calls to the new API.
 
