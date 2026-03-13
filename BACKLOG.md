@@ -258,7 +258,7 @@ Build a slide-in drawer component that opens from the right side of the screen w
 
 ### Ticket 6 — Search Functionality
 
-**Status:** [~]
+**Status:** [x]
 
 Wire up the search input in the navbar so it actually filters content.
 
