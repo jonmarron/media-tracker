@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { MediaItem, MediaType } from '@/types';
 import { useMediaItems } from '@/hooks/useMediaItems';
-import { FilterBar, FilterOption } from './FilterBar';
-import { MediaCard } from './MediaCard';
-import { EmptyState } from './EmptyState';
+import { FilterBar, FilterOption } from '@/components/FilterBar';
+import { MediaCard } from '@/components/MediaCard';
+import { EmptyState } from '@/components/EmptyState';
 
 interface MediaListViewProps {
   type: MediaType;

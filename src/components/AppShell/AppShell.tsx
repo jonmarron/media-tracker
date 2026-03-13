@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Sidebar } from './Sidebar';
-import { Navbar } from './Navbar';
+import { Sidebar } from '@/components/Sidebar';
+import { Navbar } from '@/components/Navbar';
 
 interface AppShellProps {
   children: React.ReactNode;
