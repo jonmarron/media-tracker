@@ -112,7 +112,7 @@ Seed the storage with 8–10 mock items (mix of books and films, mix of statuses
 
 ### Ticket 2 — App Layout Shell (Sidebar + Navbar)
 
-**Status:** [ ]
+**Status:** [~]
 
 Build the persistent layout that wraps all pages.
 
