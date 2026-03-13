@@ -1,7 +1,7 @@
 @reference "../../app/globals.css";
 
 .card {
-  @apply group flex cursor-pointer flex-col overflow-hidden rounded-xl transition-all;
+  @apply flex cursor-pointer flex-col overflow-hidden rounded-xl transition-all;
   background-color: var(--surface-raised);
   border: 1px solid var(--border);
 }

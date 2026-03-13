@@ -138,6 +138,7 @@ Rules:
 - Always use `@apply` inside `.module.css` for Tailwind utilities
 - Always use CSS custom properties (`var(--token)`) for colors — never hardcode hex
 - `@reference "../../app/globals.css"` must be the first line of every `.module.css` file (adjust relative path if component is nested differently)
+- **`group` cannot be used with `@apply`** — it is a variant marker, not a utility. Use plain CSS parent-child selectors instead: `.card:hover .title { color: var(--primary); }`
 
 ### Project Structure
 

@@ -18,7 +18,7 @@
 }
 
 .sidebarWrapper.closed {
-  @apply -translate-x-full;
+  @apply -translate-x-full md:translate-x-0;
 }
 
 .main {
