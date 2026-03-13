@@ -207,7 +207,7 @@ Build the Dashboard view (`/`). This is the landing page — it should feel like
 
 ### Ticket 5 — Add Item Drawer
 
-**Status:** [ ]
+**Status:** [~]
 
 Build a slide-in drawer component that opens from the right side of the screen when the user clicks the "+ Add" button in the navbar.
 
