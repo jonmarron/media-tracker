@@ -181,7 +181,7 @@ Build the list view used by both the Books page (`/books`) and Films page (`/fil
 
 ### Ticket 4 — Dashboard Page
 
-**Status:** [ ]
+**Status:** [x]
 
 Build the Dashboard view (`/`). This is the landing page — it should feel like a quick overview.
 
