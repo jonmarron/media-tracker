@@ -27,7 +27,7 @@ A web app for tracking books and films. Users can save items they've read/watche
 
 ### Ticket 0 — Project Setup
 
-**Status:** [~]
+**Status:** [x]
 
 Scaffold a new Next.js project with TypeScript and the App Router. Install and configure:
 
