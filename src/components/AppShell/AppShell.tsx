@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Sidebar } from '@/components/Sidebar';
 import { Navbar } from '@/components/Navbar';
+import { AddItemDrawer } from '@/components/AddItemDrawer';
 import styles from './AppShell.module.css';
 
 interface AppShellProps {
@@ -11,6 +12,12 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  function handleAdded() {
+    setRefreshKey((k) => k + 1);
+  }
 
   return (
     <div className={styles.root}>
@@ -23,9 +30,18 @@ export function AppShell({ children }: AppShellProps) {
       </div>
 
       <div className={styles.main}>
-        <Navbar onMenuClick={() => setSidebarOpen((o) => !o)} />
-        <main className={styles.content}>{children}</main>
+        <Navbar
+          onMenuClick={() => setSidebarOpen((o) => !o)}
+          onAddClick={() => setDrawerOpen(true)}
+        />
+        <main className={styles.content} key={refreshKey}>{children}</main>
       </div>
+
+      <AddItemDrawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onAdded={handleAdded}
+      />
     </div>
   );
 }

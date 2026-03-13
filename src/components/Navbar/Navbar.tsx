@@ -12,9 +12,10 @@ const pageTitles: Record<string, string> = {
 
 interface NavbarProps {
   onMenuClick: () => void;
+  onAddClick: () => void;
 }
 
-export function Navbar({ onMenuClick }: NavbarProps) {
+export function Navbar({ onMenuClick, onAddClick }: NavbarProps) {
   const pathname = usePathname();
   const title = pageTitles[pathname] ?? 'MediaTracker';
 
@@ -25,7 +26,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
           <Menu className={styles.menuIcon} />
         </button>
         <h1 className={styles.title}>{title}</h1>
-        <button className={styles.addButton}>
+        <button className={styles.addButton} onClick={onAddClick}>
           <Plus className={styles.addIcon} />
           Add
         </button>
