@@ -1,7 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Search, Plus, Menu } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useSearchContext } from '@/context/SearchContext';
 import styles from './Navbar.module.css';
 
 const pageTitles: Record<string, string> = {
@@ -18,6 +21,19 @@ interface NavbarProps {
 export function Navbar({ onMenuClick, onAddClick }: NavbarProps) {
   const pathname = usePathname();
   const title = pageTitles[pathname] ?? 'MediaTracker';
+  const { setSearchQuery } = useSearchContext();
+  const [inputValue, setInputValue] = useState('');
+  const debouncedValue = useDebounce(inputValue, 300);
+
+  useEffect(() => {
+    setSearchQuery(debouncedValue);
+  }, [debouncedValue, setSearchQuery]);
+
+  // Clear search when navigating between pages
+  useEffect(() => {
+    setInputValue('');
+    setSearchQuery('');
+  }, [pathname, setSearchQuery]);
 
   return (
     <header className={styles.navbar}>
@@ -34,7 +50,14 @@ export function Navbar({ onMenuClick, onAddClick }: NavbarProps) {
 
       <div className={styles.searchWrapper}>
         <Search className={styles.searchIcon} />
-        <input type="search" placeholder="Search..." className={styles.searchInput} />
+        <input
+          type="search"
+          placeholder="Search..."
+          className={styles.searchInput}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          aria-label="Search media"
+        />
       </div>
     </header>
   );
