@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { X, Star } from 'lucide-react';
 import { MediaItem, MediaType, MediaStatus } from '@/types';
-import { addItem, updateItem, deleteItem } from '@/data/storage';
+import { addItem, updateItem, deleteItem } from '@/data/api';
 import styles from './AddItemDrawer.module.css';
 
 interface AddItemDrawerProps {
@@ -58,6 +58,7 @@ export function AddItemDrawer({ isOpen, onClose, onAdded, itemToEdit }: AddItemD
   const [form, setForm] = useState<FormState>(() => emptyForm(defaultType(pathname)));
   const [error, setError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export function AddItemDrawer({ isOpen, onClose, onAdded, itemToEdit }: AddItemD
       setForm(itemToEdit ? itemToForm(itemToEdit) : emptyForm(defaultType(pathname)));
       setError('');
       setConfirmDelete(false);
+      setSubmitting(false);
       setTimeout(() => firstInputRef.current?.focus(), 50);
     }
   }, [isOpen, pathname, itemToEdit]);
@@ -86,7 +88,7 @@ export function AddItemDrawer({ isOpen, onClose, onAdded, itemToEdit }: AddItemD
     setForm((f) => ({ ...f, [key]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.title.trim()) { setError('Title is required.'); return; }
 
@@ -104,20 +106,33 @@ export function AddItemDrawer({ isOpen, onClose, onAdded, itemToEdit }: AddItemD
       dateCompleted: form.status === 'completed' ? new Date().toISOString() : undefined,
     };
 
-    if (isEditing) {
-      updateItem(itemToEdit.id, payload);
-    } else {
-      addItem(payload);
+    setSubmitting(true);
+    try {
+      if (isEditing) {
+        await updateItem(itemToEdit.id, payload);
+      } else {
+        await addItem(payload);
+      }
+      onAdded();
+      onClose();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong.');
+    } finally {
+      setSubmitting(false);
     }
-    onAdded();
-    onClose();
   }
 
-  function handleDelete() {
+  async function handleDelete() {
     if (!itemToEdit) return;
-    deleteItem(itemToEdit.id);
-    onAdded();
-    onClose();
+    setSubmitting(true);
+    try {
+      await deleteItem(itemToEdit.id);
+      onAdded();
+      onClose();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete.');
+      setSubmitting(false);
+    }
   }
 
   const drawerTitle = isEditing
@@ -235,8 +250,8 @@ export function AddItemDrawer({ isOpen, onClose, onAdded, itemToEdit }: AddItemD
                 </button>
               )
             )}
-            <button type="submit" className={styles.submitButton}>
-              {isEditing ? 'Save Changes' : `Add ${form.type === 'book' ? 'Book' : 'Film'}`}
+            <button type="submit" className={styles.submitButton} disabled={submitting}>
+              {submitting ? 'Saving…' : (isEditing ? 'Save Changes' : `Add ${form.type === 'book' ? 'Book' : 'Film'}`)}
             </button>
           </div>
         </form>

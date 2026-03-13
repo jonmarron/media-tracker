@@ -1,5 +1,14 @@
 @reference "./globals.css";
 
+.centered {
+  @apply flex items-center justify-center py-20;
+}
+
+.errorText {
+  @apply text-sm;
+  color: var(--danger);
+}
+
 .dashboard {
   @apply flex flex-col gap-8;
 }

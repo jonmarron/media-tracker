@@ -8,6 +8,15 @@
   @apply grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5;
 }
 
+.centered {
+  @apply flex items-center justify-center py-20;
+}
+
+.errorText {
+  @apply text-sm;
+  color: var(--danger);
+}
+
 .searchEmpty {
   @apply flex flex-col items-center justify-center py-16 text-center;
 }

@@ -7,12 +7,13 @@ import { useDrawerContext } from '@/context/DrawerContext';
 import { StatCard } from '@/components/StatCard';
 import { RecentMediaRow } from '@/components/RecentMediaRow';
 import { MediaCard } from '@/components/MediaCard';
+import { Spinner } from '@/components/Spinner';
 import type { MediaItem } from '@/types';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
-  const { items: books } = useMediaItems('book');
-  const { items: films } = useMediaItems('film');
+  const { items: books, loading: booksLoading, error: booksError } = useMediaItems('book');
+  const { items: films, loading: filmsLoading, error: filmsError } = useMediaItems('film');
   const { searchQuery } = useSearchContext();
   const { openEdit } = useDrawerContext();
 
@@ -50,6 +51,23 @@ export default function DashboardPage() {
 
   function handleCardClick(item: MediaItem) {
     openEdit(item);
+  }
+
+  if (booksLoading || filmsLoading) {
+    return (
+      <div className={styles.centered}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  const dataError = booksError ?? filmsError;
+  if (dataError) {
+    return (
+      <div className={styles.centered}>
+        <p className={styles.errorText}>{dataError}</p>
+      </div>
+    );
   }
 
   if (searchQuery) {

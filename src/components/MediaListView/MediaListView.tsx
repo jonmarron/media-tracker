@@ -8,6 +8,7 @@ import { useDrawerContext } from '@/context/DrawerContext';
 import { FilterBar, FilterOption } from '@/components/FilterBar';
 import { MediaCard } from '@/components/MediaCard';
 import { EmptyState } from '@/components/EmptyState';
+import { Spinner } from '@/components/Spinner';
 import styles from './MediaListView.module.css';
 
 interface MediaListViewProps {
@@ -15,7 +16,7 @@ interface MediaListViewProps {
 }
 
 export function MediaListView({ type }: MediaListViewProps) {
-  const { items } = useMediaItems(type);
+  const { items, loading, error } = useMediaItems(type);
   const { searchQuery } = useSearchContext();
   const { openEdit } = useDrawerContext();
   const [filter, setFilter] = useState<FilterOption>('all');
@@ -37,6 +38,22 @@ export function MediaListView({ type }: MediaListViewProps) {
 
   function handleCardClick(item: MediaItem) {
     openEdit(item);
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.centered}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.centered}>
+        <p className={styles.errorText}>{error}</p>
+      </div>
+    );
   }
 
   const isSearchEmpty = searchQuery.length > 0 && filtered.length === 0;
