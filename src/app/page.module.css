@@ -2,7 +2,6 @@
 
 .dashboard {
   @apply flex flex-col gap-8;
-  max-width: 48rem;
 }
 
 .stats {
