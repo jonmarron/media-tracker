@@ -150,7 +150,7 @@ Use `next/link` for navigation and `usePathname()` from `next/navigation` for ac
 
 ### Ticket 3 — Books & Films List Pages
 
-**Status:** [ ]
+**Status:** [~]
 
 Build the list view used by both the Books page (`/books`) and Films page (`/films`). These share the same layout and behavior, just filtered by media type.
 
