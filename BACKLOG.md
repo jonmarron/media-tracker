@@ -310,7 +310,68 @@ Add the ability to edit and delete existing items.
 
 ---
 
-### Ticket 8 — Polish & Micro-interactions
+### Ticket 8 — Next.js API Routes (Backend)
+
+**Status:** [~]
+
+Replace the localStorage-only approach with a proper Next.js backend using API Routes. The data should be stored server-side (in-memory for now, using a module-level store) so it survives across client sessions without relying on the browser.
+
+**API routes to create (under `src/app/api/`):**
+
+- `GET /api/items` — return all items, with optional `?type=book|film` query param
+- `POST /api/items` — create a new item (accepts item fields in the request body, assigns `id` and `dateAdded` server-side)
+- `PUT /api/items/[id]` — update an existing item by id (accepts partial fields)
+- `DELETE /api/items/[id]` — delete an item by id
+
+**Data store:**
+
+- Use a module-level array in `src/data/serverStore.ts` as the in-memory store (shared across requests within the same server process)
+- Seed the store with the same mock data from `mockData.ts` on first load
+- Keep the existing `storage.ts` (localStorage) untouched — the frontend will switch to the API in Ticket 9
+
+**Validation:**
+
+- `POST` and `PUT` should return `400` if `title` is missing or empty
+- `PUT` and `DELETE` should return `404` if the item id does not exist
+- All routes should return JSON
+
+**Acceptance criteria:**
+
+- All four routes respond correctly when tested with `curl` or a REST client
+- `GET /api/items` returns the seeded mock data
+- `POST /api/items` creates and returns the new item with a server-generated id
+- `PUT /api/items/[id]` updates and returns the modified item
+- `DELETE /api/items/[id]` removes the item and returns `204`
+- Error cases (missing title, unknown id) return the correct status codes
+
+---
+
+### Ticket 9 — Connect Frontend to Backend API
+
+**Status:** [ ]
+
+Wire the frontend to the API routes created in Ticket 8. Replace all direct calls to the localStorage helpers (`addItem`, `updateItem`, `deleteItem`, `getItems`, `searchItems`) in components and hooks with `fetch` calls to the new API.
+
+**Changes required:**
+
+- Create `src/data/api.ts` with async functions mirroring the storage helpers: `getItems`, `addItem`, `updateItem`, `deleteItem`, `searchItems` (client-side filter on the fetched results)
+- Update `useMediaItems` hook to `async`/`await` the new `getItems` from `api.ts` instead of calling localStorage directly
+- Update `AddItemDrawer` to call the async `addItem` / `updateItem` / `deleteItem` from `api.ts`
+- Handle loading and error states in `useMediaItems` — expose `loading: boolean` and `error: string | null`
+- Show a loading indicator (spinner or skeleton) in `MediaListView` and Dashboard while data is fetching
+- The localStorage `storage.ts` should no longer be used by any component — it can be kept as dead code for reference
+
+**Acceptance criteria:**
+
+- Adding, editing, and deleting items goes through the API (verify in the Network tab)
+- `localStorage` is no longer read or written during normal app use
+- Page refresh retains data (served from the in-memory server store)
+- Loading state is visible while the initial fetch is in progress
+- Errors from the API are surfaced to the user (a simple inline message is fine)
+
+---
+
+### Ticket 10 — Polish & Micro-interactions
 
 **Status:** [ ]
 
