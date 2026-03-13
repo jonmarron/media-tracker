@@ -65,7 +65,7 @@ Create placeholder pages (Dashboard, Books, Films) that just render their name a
 
 ### Ticket 1 — Data Model & Storage Layer
 
-**Status:** [~]
+**Status:** [x]
 
 Define the TypeScript types for the app and build a simple storage layer using localStorage.
 
