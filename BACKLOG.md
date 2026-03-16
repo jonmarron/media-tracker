@@ -371,7 +371,37 @@ Wire the frontend to the API routes created in Ticket 8. Replace all direct call
 
 ---
 
-### Ticket 10 — Polish & Micro-interactions
+### Ticket 10 — Swagger API Documentation
+
+**Status:** [x]
+
+Add an interactive Swagger UI to document and manually test the API routes built in Ticket 8. Use `swagger-ui-react` for the UI and define the OpenAPI spec as a plain TypeScript object served from a new API route.
+
+**Changes required:**
+
+- Install `swagger-ui-react` and `@types/swagger-ui-react`
+- Create `src/app/api/docs/openapi.ts` — exports the OpenAPI 3.0 spec object describing all four endpoints (`GET /api/items`, `POST /api/items`, `PUT /api/items/[id]`, `DELETE /api/items/[id]`) with request/response schemas derived from the `MediaItem` type
+- Create `src/app/api/docs/route.ts` — `GET /api/docs` returns the spec as JSON so it can be fetched by the UI
+- Create `src/app/docs/page.tsx` — a client page at `/docs` that renders `SwaggerUI` pointed at `/api/docs`
+- The page is accessible at `/docs` directly — no sidebar or navbar link needed (it's a developer tool, not part of the app UI)
+
+**Spec must document:**
+
+- All request parameters (`?type` query param on GET)
+- Request body schemas for POST and PUT (with `title` marked as required)
+- All response schemas (200/201 with `MediaItem`, 204 for DELETE, 400/404 error shape)
+- Tag all routes under `"Items"`
+
+**Acceptance criteria:**
+
+- Navigating to `/docs` renders the Swagger UI without errors
+- All four endpoints are listed with their parameters, request bodies, and response schemas
+- Clicking "Try it out" on `GET /api/items` and executing returns live data from the server
+- Navigating directly to `/docs` in the browser renders the Swagger UI correctly
+
+---
+
+### Ticket 11 — Polish & Micro-interactions
 
 **Status:** [ ]
 
