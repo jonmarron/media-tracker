@@ -373,7 +373,7 @@ Wire the frontend to the API routes created in Ticket 8. Replace all direct call
 
 ### Ticket 10 — Swagger API Documentation
 
-**Status:** [~]
+**Status:** [x]
 
 Add an interactive Swagger UI to document and manually test the API routes built in Ticket 8. Use `swagger-ui-react` for the UI and define the OpenAPI spec as a plain TypeScript object served from a new API route.
 
